@@ -1,4 +1,5 @@
 #include <iostream>
+#include <sstream>
 #include <list>
 
 template <typename T>
@@ -28,7 +29,9 @@ class Edge {
         }
 
         std::string toString() const {
-            return "(" + std::to_string(refDest->getData()) + ", " + std::to_string(weight) + ")";
+            std::ostringstream oss;
+            oss << "(" << refDest->getData() << ", " << weight << ")";
+            return oss.str();
         }
 };
 
@@ -95,6 +98,7 @@ class GraphLink {
 
             if (vFrom && vTo) {
                 vFrom->addEdge(vTo, weight);
+                vTo->addEdge(vFrom, weight);
                 return;
             }
 
