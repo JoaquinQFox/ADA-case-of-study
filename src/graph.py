@@ -14,8 +14,10 @@ class Vertex:
     def add_edge(self, dest, weight):
         if any(e.dest == dest for e in self.adj_list):
             return
-
         self.adj_list.append(Edge(dest, weight))
+
+    def __lt__(self, other):
+        return self.data < other.data  
 
 class GraphLink:
     def __init__(self):
