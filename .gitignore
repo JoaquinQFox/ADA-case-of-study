@@ -1,42 +1,62 @@
-# Ejecutables de Windows
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Entornos virtuales
+env/
+venv/
+ENV/
+.venv/
+
+# Distribuciones / empaquetados
+build/
+dist/
+*.egg-info/
+*.egg
+.eggs/
+
+# Archivos de instalación de pip
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Archivos de test / cobertura
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# Archivos de depuración y temporales
+*.log
+*.tmp
+*.temp
+
+# Archivos de VS Code
+.vscode/
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Archivos de C/C++ compilados (si llegas a usar C++)
 *.exe
-*.exe~
 *.dll
 *.obj
 *.o
 *.out
 *.a
 *.lib
-*.out
-
-# Archivos de depuración
 *.pdb
 *.idb
 *.ilk
-
-# Carpeta de configuración de VS Code
-.vscode/
-
-# Archivos temporales
-*.log
-*.tmp
-*.temp
-
-# Archivos de sistema de Windows
-Thumbs.db
-Desktop.ini
 
 # Archivos de respaldo de editores
 *~
 *.swp
 *.swo
-
-# Archivos de CMake (si llegas a usarlo)
-CMakeFiles/
-CMakeCache.txt
-cmake_install.cmake
-Makefile
-
-# Archivos de compilación en general
-/build/
-bin/
