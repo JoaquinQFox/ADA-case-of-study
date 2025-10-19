@@ -34,6 +34,16 @@ def floyd_warshall (g: GraphLink):
                     dist[i][j] = alt
                     next[i][j] = next[i][k]
     
+    ciclos_negativos = []
+    for i in range(n):
+        if dist[i][i] < 0:
+            ciclos_negativos.append(g.vertices[i].data)
+
+    if ciclos_negativos:
+        print("Ciclos negativos: ", ciclos_negativos)
+    else:
+        print("No se detectaron ciclos negativos.")
+
     return dist, next, index
 
 
