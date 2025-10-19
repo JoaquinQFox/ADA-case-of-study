@@ -35,3 +35,23 @@ def floyd_warshall (g: GraphLink):
                     next[i][j] = next[i][k]
     
     return dist, next, index
+
+
+def obtener_camino (origen, destino, g: GraphLink, next, index):
+    i = index[origen]
+    j = index[destino]
+
+    if next[i][j] is None:
+        return []
+    
+    camino_detallado = []
+    actual = origen
+
+    while i != j:
+        i = next[i][j]
+        siguiente = g.vertices[i].data
+        peso      = g.get_edge_weight(actual, siguiente)
+        camino_detallado.append((actual, siguiente, peso))
+        actual    = siguiente
+
+    return camino_detallado
