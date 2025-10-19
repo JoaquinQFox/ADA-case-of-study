@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import random
 from graph import GraphLink
 
-def graficar_grafo(grafo : GraphLink):
+def graficar_grafo(grafo : GraphLink, posiciones=None):
     G = nx.Graph()
 
     for vertices in grafo.vertices:
@@ -14,16 +14,30 @@ def graficar_grafo(grafo : GraphLink):
             if not G.has_edge(vertex.data, edge.dest.data):
                 G.add_edge(vertex.data, edge.dest.data, weight=edge.weight)
 
-    pos = nx.spring_layout(G)
+    if posiciones == None:
+        posiciones = nx.spring_layout(G)
 
-    nx.draw_networkx_nodes(G, pos, node_color='lightblue', node_size=700)
+    node_colors = ['red' if node == 1 else 'lightblue' for node in G.nodes()]
 
-    nx.draw_networkx_edges(G, pos, width=2)
+    edge_colors = []
+    for u, v in G.edges():
+        w = G[u][v]['weight']
+        if w == 0:
+            edge_colors.append('red')
+        else:
+            edge_colors.append('black')
 
-    nx.draw_networkx_labels(G, pos, font_size=12, font_color='black')
+
+
+    plt.figure(figsize=(12, 12), dpi=2092//12)
+
+
+    nx.draw_networkx_nodes(G, posiciones, node_color=node_colors, node_size=700)
+    nx.draw_networkx_edges(G, posiciones, edge_color=edge_colors, width=2)
+    nx.draw_networkx_labels(G, posiciones, font_size=12, font_color='black')
 
     edge_labels = nx.get_edge_attributes(G, 'weight')
-    nx.draw_networkx_edge_labels(G, pos, edge_labels=edge_labels)
+    nx.draw_networkx_edge_labels(G, posiciones, font_size=6, edge_labels=edge_labels)
 
     plt.axis('off')
     plt.show()
