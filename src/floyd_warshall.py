@@ -34,17 +34,17 @@ def floyd_warshall (g: GraphLink):
                     dist[i][j] = alt
                     next[i][j] = next[i][k]
     
-    ciclos_negativos = []
+    ciclos_negativos = False
     for i in range(n):
         if dist[i][i] < 0:
-            ciclos_negativos.append(g.vertices[i].data)
+            ciclos_negativos = True
 
     if ciclos_negativos:
         print("Se detectaron ciclos negativos.")
     else:
         print("No se detectaron ciclos negativos.")
 
-    return dist, next, index
+    return dist, next, index, ciclos_negativos
 
 
 def obtener_camino (origen, destino, g: GraphLink, next, index):
@@ -67,7 +67,7 @@ def obtener_camino (origen, destino, g: GraphLink, next, index):
     return camino_detallado
 
 
-def reconstruir_grafo_floyd(origen, grafo, dist, next, index):
+def reconstruir_grafo_floyd(origen, grafo, dist, next, index, ciclos_negativos):
     grafo_rutas = GraphLink()
 
     for v in grafo.vertices:
@@ -75,6 +75,10 @@ def reconstruir_grafo_floyd(origen, grafo, dist, next, index):
 
     if origen not in index:
         print("Vértice no existe en el grafo.")
+        return grafo_rutas
+    
+    if ciclos_negativos:
+        print("Error al reconstruir: el grafo tiene ciclos negativos.")
         return grafo_rutas
 
     i_origen = index[origen]
