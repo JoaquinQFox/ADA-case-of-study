@@ -27,6 +27,9 @@ def dijkstra(grafo : GraphLink, inicio):
             peso = edge.weight
             nueva_dist = actual_dist + peso
 
+            if peso == 0:
+                continue
+
             if nueva_dist < dist[vecino.data]:
                 dist[vecino.data] = nueva_dist
                 prev[vecino.data] = actual_vertex.data 
