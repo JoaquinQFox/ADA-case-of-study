@@ -55,3 +55,25 @@ def obtener_camino (origen, destino, g: GraphLink, next, index):
         actual    = siguiente
 
     return camino_detallado
+
+
+def reconstruir_grafo_floyd (origen, grafo, dist, next, index):
+    grafo_rutas = GraphLink()
+
+    for v in grafo.vertices:
+        grafo_rutas.insert_vertex(v.data)
+
+    if origen not in index:
+        print("Vértice no existe en el grafo.")
+        return grafo_rutas
+
+    for destino in index:
+        if destino == origen:
+            continue
+
+        camino = obtener_camino(origen, destino, grafo, next, index)
+
+        for (a, b, peso) in camino:
+            grafo_rutas.insert_edge(a, b, peso)
+
+    return grafo_rutas
