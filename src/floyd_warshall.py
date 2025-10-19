@@ -40,7 +40,7 @@ def floyd_warshall (g: GraphLink):
             ciclos_negativos.append(g.vertices[i].data)
 
     if ciclos_negativos:
-        print("Ciclos negativos: ", ciclos_negativos)
+        print("Se detectaron ciclos negativos.")
     else:
         print("No se detectaron ciclos negativos.")
 
@@ -67,7 +67,7 @@ def obtener_camino (origen, destino, g: GraphLink, next, index):
     return camino_detallado
 
 
-def reconstruir_grafo_floyd (origen, grafo, dist, next, index):
+def reconstruir_grafo_floyd(origen, grafo, dist, next, index):
     grafo_rutas = GraphLink()
 
     for v in grafo.vertices:
@@ -77,13 +77,25 @@ def reconstruir_grafo_floyd (origen, grafo, dist, next, index):
         print("Vértice no existe en el grafo.")
         return grafo_rutas
 
-    for destino in index:
+    i_origen = index[origen]
+
+    for destino, j in index.items():
         if destino == origen:
+            continue
+        
+        if dist[i_origen][j] == float('inf'):
             continue
 
         camino = obtener_camino(origen, destino, grafo, next, index)
 
+        if not camino:
+            continue
+
         for (a, b, peso) in camino:
-            grafo_rutas.insert_edge(a, b, peso)
+            if peso == 0:
+                continue
+                
+            if grafo_rutas.get_edge_weight(a, b) == -1:
+                grafo_rutas.insert_edge(a, b, peso)
 
     return grafo_rutas
