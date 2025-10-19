@@ -103,3 +103,39 @@ def reconstruir_grafo_floyd(origen, grafo, dist, next, index, ciclos_negativos):
                 grafo_rutas.insert_edge(a, b, peso)
 
     return grafo_rutas
+
+
+def mostrar_tabla_distancias(dist, index, g: GraphLink):
+    vertices = sorted([v.data for v in g.vertices])
+    n = len(vertices)
+    ancho = 6
+    
+    print("\n" + "="*((ancho + 1) * (n + 1) + 1))
+    print("TABLA DE DISTANCIAS MÍNIMAS (Floyd-Warshall)")
+    print("="*((ancho + 1) * (n + 1) + 1))
+    
+    print(f"{'Desde':^{ancho}}", end=" ")
+    for v in vertices:
+        print(f"{v:^{ancho}}", end=" ")
+    print()
+    
+    print("-"*((ancho + 1) * (n + 1) + 1))
+    
+    for v_origen in vertices:
+        i = index[v_origen]
+        print(f"{v_origen:^{ancho}}", end=" ")
+        
+        for v_destino in vertices:
+            j = index[v_destino]
+            valor = dist[i][j]
+            
+            if valor == float('inf'):
+                print(f"{'∞':^{ancho}}", end=" ")
+            elif valor == 0 and v_origen == v_destino:
+                print(f"{'-':^{ancho}}", end=" ")
+            else:
+                print(f"{valor:^{ancho}.0f}", end=" ")
+        print()
+    
+    print("="*((ancho + 1) * (n + 1) + 1))
+    print()

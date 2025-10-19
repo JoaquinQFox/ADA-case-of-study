@@ -1,4 +1,4 @@
-from floyd_warshall import floyd_warshall, reconstruir_grafo_floyd
+from floyd_warshall import floyd_warshall, reconstruir_grafo_floyd, mostrar_tabla_distancias
 from graph import GraphLink
 from grafo_prueba import get_graph, get_graph_negative, get_posiciones
 from graficador import graficar_grafo
@@ -12,6 +12,8 @@ if __name__ == "__main__":
     dist, next, index, ciclos_negativos = floyd_warshall(grafo)
 
     new_graph = reconstruir_grafo_floyd(1, grafo, dist, next, index, ciclos_negativos)
+
+    mostrar_tabla_distancias(dist, index, grafo)
 
     graficar_grafo(new_graph, posiciones)
 
